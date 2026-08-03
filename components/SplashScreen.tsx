@@ -31,9 +31,9 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish, isDark }) 
           {/* Logo / Carga */}
           <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-3xl group-hover:bg-blue-500/30 transition-all duration-1000"></div>
           <img 
-            src="/assets/loading.png" 
-            alt="Loading Assistant" 
-            className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(56,189,248,0.5)] rounded-2xl relative z-10"
+            src="/assets/logo_istae_10agosto.png" 
+            alt="UE 10 de Agosto - ISTAE Software" 
+            className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(56,189,248,0.5)] rounded-2xl relative z-10 mx-auto" 
           />
         </div>
         
@@ -45,7 +45,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish, isDark }) 
           </div>
           
           <p className={`text-lg font-semibold tracking-widest uppercase animate-pulse ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>
-            Sofia se está preparando...
+            Agostin se está preparando...
           </p>
         </div>
       </div>

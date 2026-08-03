@@ -22,6 +22,7 @@ export interface Assistant {
   voiceName: 'Puck' | 'Charon' | 'Kore' | 'Fenrir' | 'Zephyr' | 'Aoede';
   systemInstruction: string;
   theme: 'cyan' | 'rose' | 'amber' | 'violet';
+  avatar?: string;
 }
 
 export interface ChatMessage {

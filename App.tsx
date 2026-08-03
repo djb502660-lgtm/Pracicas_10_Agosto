@@ -12,18 +12,18 @@ import { ScreenShareModal } from './components/ScreenShareModal';
 
 import conocimiento_camila from './TesosComparar/Tesis.Comapara.md?raw';
 import conocimiento_asistentedavid from './PensamientosPEA/asistente.david.md?raw';
-
+import conocimiento_asistenteagostin from './PensamientosPEA/asistente.agostin.md?raw';
 import Conocimiento_Planificacion_Microcurricular_Ingles_8vo from './PensamientosPEA/Planificacion_Microcurricular_Ingles_8vo.md?raw';
 import Conocimiento_Planificacion_Microcurricular_Ingles_9no from './PensamientosPEA/planificacion_microcurricular_Igles_9no.md?raw';
 const ASSISTANTS: Assistant[] = [
   {
-    id: 'Maluma',
-    name: 'Maluma',
-    description: 'Tu amigo paisa enérgico y confiable',
+    id: 'Agostin',
+    name: 'Agostin',
+    description: 'Tu amigo enérgico y confiable',
     voiceName: 'Puck',
     theme: 'cyan',
     systemInstruction: `
-      ${conocimiento_asistentedavid}
+      ${conocimiento_asistenteagostin}
     
       === INICIO DE CONOCIMIENTO ACADÉMICO (1 ASIGNATURAS) ===
       
@@ -34,8 +34,7 @@ const ASSISTANTS: Assistant[] = [
 
       Otras referencias de conocimiento adicional:
 
-      ${conocimiento_camila}
-
+    
       Recuerda: Basa tus respuestas en la información académica proporcionada arriba.
     `
   },
@@ -725,7 +724,7 @@ const App: React.FC = () => {
 
   const renderIcon = (id: string) => {
     switch (id) {
-      case 'Sofia': return <User2 className="w-4 h-4" />;
+      case 'Agostin': return <User2 className="w-4 h-4" />;
       case 'camila': return <Heart className="w-4 h-4" />;
       case 'kara': return <Zap className="w-4 h-4" />;
       case 'valeria': return <Sparkles className="w-4 h-4" />;
@@ -793,6 +792,15 @@ const App: React.FC = () => {
               <MessageSquare className="w-5 h-5" />
             </button>
 
+            {/* Mascota en el encabezado */}
+            <div className="absolute right-10 top-0 flex items-center">
+              <img
+                src="/assets/mascotas10_agosto_istae.png"
+                alt="Mascotas UE 10 de Agosto - ISTAE"
+                className="w-10 h-10 object-contain rounded-lg drop-shadow-md"
+              />
+            </div>
+
           </div>
 
           {/* Selector de Asistente */}
@@ -807,7 +815,11 @@ const App: React.FC = () => {
                   ${selectedAssistantId === assistant.id ? 'bg-slate-700 text-white shadow-lg scale-105' : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'}
                 `}
                 >
-                  {renderIcon(assistant.id)}
+                  <img
+                    src={assistant.avatar || '/assets/mascota10_agosto.png'}
+                    alt={assistant.name}
+                    className="w-5 h-5 rounded-full object-cover border border-white/20"
+                  />
                   {assistant.name}
                 </button>
               ))}
@@ -848,11 +860,11 @@ const App: React.FC = () => {
             )}
 
             {/* Imagen del Personaje */}
-            <div className={`absolute inset-0 transition-opacity duration-700 ${isConnected ? 'opacity-40' : 'opacity-80'}`}>
+            <div className={`absolute inset-0 flex items-center justify-center p-3 transition-opacity duration-700 ${isConnected ? 'opacity-40' : 'opacity-85'}`}>
               <img
-                src={selectedAssistant.id === 'Sofia' ? '/sofia.jpg' : `https://picsum.photos/seed/${selectedAssistant.id}/400/400?grayscale`}
-                alt="Avatar"
-                className="w-full h-full object-cover transition-all duration-1000 grayscale group-hover:grayscale-0"
+                src={selectedAssistant.avatar || '/assets/mascota10_agosto.png'}
+                alt={selectedAssistant.name}
+                className="w-full h-full object-contain object-center transition-all duration-1000 group-hover:scale-105 drop-shadow-xl"
               />
             </div>
 

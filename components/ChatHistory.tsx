@@ -115,7 +115,11 @@ export const ChatHistory: React.FC<ChatHistoryProps> = ({ messages, isOpen, onCl
                     <span className="text-xs text-slate-400">{formatTime(msg.timestamp)}</span>
                   ) : (
                     <>
-                      <Sparkles className={`w-3 h-3 ${currentStyle.accent}`} />
+                      <img 
+                        src="/assets/mascota10_agosto.png" 
+                        alt="Mascota IA" 
+                        className="w-4 h-4 rounded-full object-cover border border-white/20 shadow-sm" 
+                      />
                       <span className={`text-xs font-medium uppercase tracking-wider ${currentStyle.accent}`}>
                         {msg.assistantId || 'Asistente'}
                       </span>
