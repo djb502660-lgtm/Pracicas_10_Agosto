@@ -803,29 +803,6 @@ const App: React.FC = () => {
 
           </div>
 
-          {/* Selector de Asistente */}
-          <div className="sticky top-0 z-50 py-2 w-full flex justify-center">
-            <div className="flex flex-wrap justify-center bg-slate-800/80 p-2 rounded-xl backdrop-blur-md border border-white/5 relative gap-2 shadow-xl">
-              {ASSISTANTS.map((assistant) => (
-                <button
-                  key={assistant.id}
-                  onClick={() => handleAssistantChange(assistant.id)}
-                  className={`
-                  relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 flex items-center gap-2
-                  ${selectedAssistantId === assistant.id ? 'bg-slate-700 text-white shadow-lg scale-105' : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'}
-                `}
-                >
-                  <img
-                    src={assistant.avatar || '/assets/mascota10_agosto.png'}
-                    alt={assistant.name}
-                    className="w-5 h-5 rounded-full object-cover border border-white/20"
-                  />
-                  {assistant.name}
-                </button>
-              ))}
-            </div>
-          </div>
-
           <div className="text-center space-y-1 h-12 lg:h-16">
 
             {/* Si está compartiendo pantalla, renderizar el cuadrito flotante */}
@@ -971,11 +948,6 @@ const App: React.FC = () => {
                   )}
                 </button>
               </div>
-              <p className="text-slate-500 text-xs max-w-xs text-center leading-relaxed mt-2">
-                {isConnected
-                  ? `Habla, escribe o comparte tu pantalla.`
-                  : "Presiona para conectar."}
-              </p>
             </div>
 
             {/* Input de Texto Secundario (Premium) */}
@@ -998,7 +970,6 @@ const App: React.FC = () => {
                     type="text"
                     value={textInput}
                     onChange={(e) => setTextInput(e.target.value)}
-                    placeholder="Escribe un mensaje..."
                     className={`
                       flex-1 bg-transparent border-none outline-none text-sm placeholder:text-slate-500
                       ${isDarkTheme ? 'text-white' : 'text-slate-800'}

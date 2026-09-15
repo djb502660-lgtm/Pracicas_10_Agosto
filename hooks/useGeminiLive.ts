@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import { GoogleGenAI, LiveServerMessage, Modality } from "@google/genai";
 import { ConnectionState } from "../types";
 import { createBlob, decode, decodeAudioData } from "../utils/audioUtils";
@@ -155,9 +155,32 @@ export const useGeminiLive = () => {
           systemInstructionText += `\n\n[CONTEXTO DE REANUDACIÓN]: Esta sesión se ha actualizado para mantener la estabilidad. Lo último que estabas diciendo era: "${lastAssistantSpeechRef.current}". Por favor, retoma la idea o pregunta si el usuario quiere continuar con ese tema de forma natural, sin mencionar que te reiniciaste.`;
         }
 
-        // Obtener la API key, priorizando la provista en la configuración o .env
-        const apiKey = config.apiKey || (import.meta.env && import.meta.env.VITE_GEMINI_API_KEY);
-        if (!apiKey) throw new Error("API Key no encontrada.");
+        // Obtener la API key, priorizando la provista en la configuración, luego la variable de entorno y finalmente localStorage.
+        let apiKey = config.apiKey || (import.meta.env && import.meta.env.VITE_GEMINI_API_KEY);
+
+        if (!apiKey) {
+          try {
+            apiKey = localStorage.getItem('gemini_api_key') || '';
+          } catch (e) {
+            console.warn('No se pudo leer la API key desde localStorage.', e);
+          }
+        }
+
+        if (!apiKey) {
+          try {
+            if (typeof window !== 'undefined' && typeof window.prompt === 'function') {
+              const promptedKey = window.prompt('Introduce tu API key de Gemini para conectar al asistente:', '');
+              if (promptedKey && promptedKey.trim()) {
+                apiKey = promptedKey.trim();
+              }
+            }
+          } catch (e) {
+            console.warn('window.prompt no está disponible en este entorno.', e);
+          }
+        }
+
+        if (!apiKey) throw new Error("API Key no encontrada. Agrega VITE_GEMINI_API_KEY en .env.local o habilita el prompt del navegador para introducir la clave.");
+
         // Sincronizar la API key con localStorage para evitar caché obsoleta
         try {
           const storedKey = localStorage.getItem('gemini_api_key');
